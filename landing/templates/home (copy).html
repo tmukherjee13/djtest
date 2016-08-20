@@ -1,0 +1,533 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Developer | Freelancer - Tarun Mukherjee</title>
+    <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/flexslider.css' %}" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <link href="{% static 'css/queries.css' %}" rel="stylesheet">
+    <link href="{% static 'css/animate.css' %}" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+                <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+                <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+                <![endif]-->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.2.0/css/font-awesome.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/menu_cornermorph.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/typed.css' %}" />
+</head>
+
+<body id="top">
+    <div class="menu-wrap">
+        <nav class="menu">
+            <div class="profile"><img src="{% static 'img/user1.png' %}" alt="Tarun Mukherjee" /><span>Tarun Mukherjee</span>
+            </div>
+            <div class="link-list page-scroll">
+                <a href="#intro"><span>About Me</span></a>
+                <a href="#features"><span>What I Do</span></a>
+                <a href="#testimonial"><span>Testimonials</span></a>
+                <a href="#portfolio"><span>My Works</span></a>
+                <a href="#contact"><span>Get in Touch</span></a>
+            </div>
+            <div class="icon-list page-scroll">
+                <a href="#top"><i class="fa fa-fw fa-home"></i></a>
+                <a href="#"><i class="fa fa-fw fa-question-circle"></i></a>
+                <a href="#"><i class="fa fa-fw fa-power-off"></i></a>
+            </div>
+        </nav>
+    </div>
+    <button class="menu-button" id="open-button"><i class="fa fa-fw fa-cog"></i><span>Open Menu</span>
+    </button>
+
+    <header id="home">
+        <section class="hero" id="hero">
+            <div class="container">
+                <!-- <div class="row">
+                                <div class="col-md-12 text-left navicon">
+                                    <a  id="nav-toggle" class="nav_slide_button" href="#"><span></span></a>
+                                </div>
+                            </div>  -->
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 text-center inner">
+                        <h1  class="animated fadeInDown">I'm <span id="typed"></span></h1>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 text-center">
+                        <h2 class="animated fadeInUp delay-05s">
+                            <span>
+                                <div class="animated fadeInUp delay-05s type-wrap">
+                                    <span id="typed1" style="white-space:pre;"></span>
+                                </div>
+                            </span>
+                         </h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 text-center page-scroll">
+                        <a href="#intro" class="learn-more-btn animated fadeInUp delay-1s">Know me More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+
+
+
+    <section class="intro text-center section-padding" id="intro">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-8 col-md-offset-2 wp1">
+                    <h1 class="arrow heading">Who Am I</h1>
+                </div>
+
+                {% if content.about_sub %}
+                <div class="col-md-4 col-md-offset-2 wp1">
+                    {% else %}
+                    <div class="col-md-8 col-md-offset-2 wp1">
+                        {% endif %}
+
+
+                        <p>{{ content.about_me|safe }}</p>
+                    </div>
+
+                    {% if content.about_sub %}
+                    <div class="col-md-4 wp1">
+                        <p>{{ content.about_sub|safe }}</p>
+                    </div>
+                    {% endif %}
+
+                    <div class="col-lg-8 col-lg-offset-2 text-center resume">
+                        <a href="#" class="btn btn-lg btn-outline animated fadeInUp delay-1s">
+                            <i class="fa fa-download"></i> Download Resume
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+    </section>
+
+    <section class="features text-center section-padding" id="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="arrow">What I Do</h1>
+                    <div class="features-wrapper">
+
+                        {% for service in services %}
+
+
+                        <div class="col-md-4 wp2 {% ifequal forloop.counter 2 %} delay-05s {% endifequal %} {% ifequal forloop.counter 3 %} delay-1s {% endifequal %} ">
+                            <div class="icon">
+                                <i class="fa {% ifequal forloop.counter 1 %} fa-laptop {% endifequal %} {% ifequal forloop.counter 2 %} fa-code {% endifequal %} {% ifequal forloop.counter 3 %} fa-heart {% endifequal %} shadow"></i>
+                            </div>
+                            <h2>{{ service.name }}</h2>
+                            <p>
+                                {{ service.detail }}
+                            </p>
+                        </div>
+                        {% endfor %}
+                        <!-- <div class="col-md-4 wp2 delay-05s">
+                            <div class="icon">
+                                <i class="fa fa-code shadow"></i>
+                            </div>
+                            <h2>Web Development</h2>
+                            <p>You want a website? You've come the right place.
+                                <br/> Be it your own Blogging site or an E-Commerce store or any other website you have in mind. I will help you get it done without any hassle.
+                            </p>
+                        </div>
+                        <div class="col-md-4 wp2 delay-1s">
+                            <div class="icon">
+                                <i class="fa fa-heart shadow"></i>
+                            </div>
+                            <h2>Creative Direction</h2>
+                            <p>Response time is a major factor in generating revenue these days. Leave your worries </p>
+                        </div> -->
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- <section class="swag text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h1>About Me<span>but <em>design</em> 'aint one</span></h1>
+                    <a href="#portfolio" class="down-arrow-btn"><i class="fa fa-chevron-down"></i></a>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <section class="swag text-center section-padding" id="testimonial">
+        <div class="container fill">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h1>What people say about me</h1>
+                    <div class="carousel slide" data-ride="carousel" id="quote-carousel">
+                        <!-- Bottom Carousel Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#quote-carousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#quote-carousel" data-slide-to="1"></li>
+                            <li data-target="#quote-carousel" data-slide-to="2"></li>
+                        </ol>
+
+                        <!-- Carousel Slides / Quotes -->
+                        <div class="carousel-inner">
+
+                            <!-- Quote 1 -->
+                            <div class="item active">
+                                <blockquote>
+                                    <div class="row">
+                                        <div class="col-sm-3 text-center">
+                                            <!-- <img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg" style="width: 100px;height:100px;"> -->
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit!</p>
+                                            <small>Someone famous</small>
+                                        </div>
+                                    </div>
+                                </blockquote>
+                            </div>
+                            <!-- Quote 2 -->
+                            <div class="item">
+                                <blockquote>
+                                    <div class="row">
+                                        <div class="col-sm-3 text-center">
+                                            <!-- <img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/mijustin/128.jpg" style="width: 100px;height:100px;"> -->
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam auctor nec lacus ut tempor. Mauris.</p>
+                                            <small>Someone famous</small>
+                                        </div>
+                                    </div>
+                                </blockquote>
+                            </div>
+                            <!-- Quote 3 -->
+                            <div class="item">
+                                <blockquote>
+                                    <div class="row">
+                                        <div class="col-sm-3 text-center">
+                                            <!-- <img class="img-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/keizgoesboom/128.jpg" style="width: 100px;height:100px;"> -->
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut rutrum elit in arcu blandit, eget pretium nisl accumsan. Sed ultricies commodo tortor, eu pretium mauris.</p>
+                                            <small>Someone famous</small>
+                                        </div>
+                                    </div>
+                                </blockquote>
+                            </div>
+                        </div>
+
+                        <!-- Carousel Buttons Next/Prev -->
+                        <a data-slide="prev" href="#quote-carousel" class="left carousel-control"><i class="fa fa-chevron-left"></i></a>
+                        <a data-slide="next" href="#quote-carousel" class="right carousel-control"><i class="fa fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+    </section>
+
+
+
+
+
+    <section class="portfolio text-center section-padding" id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="arrow">My Works</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                {% for portfolio in portfolios %}
+                <div class="col-sm-4 portfolio-item">
+                    <a href="#portfolioModal{{ portfolio.id }}" class="portfolio-link" data-toggle="modal">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <i class="fa fa-search-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="{{ MEDIA_URL }}{{ portfolio.image }}" class="img-responsive" alt="">
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
+    <section class="subscribe text-center" id="contact">
+        <div class="container">
+            <h1><i class="fa fa-paper-plane"></i><span>Drop Me a Line</span></h1>
+            <form name="sentMessage" id="contactForm">
+                {% csrf_token %}
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- <input type="text" placeholder="Name" id="name" required data-validation-required-message="Please enter your name."> -->
+                        {{ form.name }}
+                        <p class="help-block text-danger">{{ form.name.errors }}</p>
+                    </div>
+                    <div class="col-xs-12">
+                        <!-- <input type="email" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address."> -->
+                        {{ form.email }}
+                        <p class="help-block text-danger">{{ form.email.errors }}</p>
+                    </div>
+                </div>
+
+                <div class="row control-group">
+                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                        <!-- <textarea rows="5" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea> -->
+                        {{ form.message }}
+                        <p class="help-block text-danger">{{ form.message.errors }}</p>
+                    </div>
+                </div>
+                <br>
+                <div id="success"></div>
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <input type="submit" name="" value="Send">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    {% comment %}
+    <!-- <section class="dark-bg text-center section-padding contact-wrap" id="drop_a_line">
+        <a href="#top" class="up-btn"><i class="fa fa-chevron-up"></i></a>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="arrow">Drop me a line</h1>
+                </div>
+            </div>
+            <div class="row contact-details">
+                <div class="col-md-4">
+                    <div class="light-box box-hover">
+                        <h2><i class="fa fa-map-marker"></i><span>Address</span></h2>
+                        <p>Level 6, 23 Pitt St, Sydney</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="light-box box-hover">
+                        <h2><i class="fa fa-mobile"></i><span>Phone</span></h2>
+                        <p>+61 9 211 3747</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="light-box box-hover">
+                        <h2><i class="fa fa-paper-plane"></i><span>Email</span></h2>
+                        <p><a href="#">hey@halcyondays.com</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section> -->
+
+
+    <!-- <footer>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                 <ul class="legals">
+                                    <li><a href="#">Terms &amp; Conditions</a></li>
+                                    <li><a href="#">Legals</a></li>
+                                </ul> 
+                                <p>Copyright 2015 Tarun Mukherjee</p>
+
+                            </div>
+                            <div class="col-md-6 credit">
+                                <p>Designed &amp; Developed by <a href="http://www.peterfinlan.com/">Peter Finlan</a> exclusively for <a href="http://tympanus.net/codrops/"><em>Codrops</em></a></p>
+                            </div> 
+                        </div>
+                    </div>
+                </footer> -->
+    {% endcomment %}
+    <footer class="text-center">
+        <div class="footer-above">
+            <div class="container">
+                <div class="row">
+
+                    <div class="footer-col col-md-12">
+                        <h3>Reach Me On</h3>
+                        <ul class="list-inline">
+
+                            {% if content.facebook %}
+                            <li>
+                                <a href="{{ content.facebook }}" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
+                            </li>
+                            {% endif %} {% if content.gplus %}
+                            <li>
+                                <a href="{{ content.gplus }}" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
+                            </li>
+                            {% endif %} {% if content.twitter %}
+                            <li>
+                                <a href="{{ content.twitter }}" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
+                            </li>
+                            {% endif %} {% if content.linkedin %}
+                            <li>
+                                <a href="{{ content.linkedin }}" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
+                            </li>
+                            {% endif %}
+
+
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Copyright © Tarun Mukherjee {% now "Y" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Portfolios Start -->
+    {% for portfolio in portfolios %}
+    <div class="portfolio-modal modal fade" id="portfolioModal{{ portfolio.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>{{ portfolio.project_name }}</h2>
+                            <hr class="star-primary">
+                            <img src="{{ MEDIA_URL }}{{ portfolio.image }}" class="img-responsive img-centered" alt="">
+                            <p>{{ portfolio.description }}</p>
+                            <ul class="list-inline item-details">
+                                <li>Client:
+                                    <strong><a href="{{ portfolio.website }}">{{ portfolio.website }}</a>
+                                            </strong>
+                                </li>
+                                <li>Date:
+                                    <strong><a href="{{ portfolio.website }}">{{ portfolio.added_date|date:"F, Y" }}</a>
+                                            </strong>
+                                </li>
+                                <li>Service:
+                                    <strong><a href="javascript:void(0);">{{ portfolio.service }}</a>
+                                            </strong>
+                                </li>
+                            </ul>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- Portfolios End -->
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="{% static 'js/waypoints.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="{% static 'js/jquery.flexslider.js' %}"></script>
+    <script src="{% static 'js/modernizr.js' %}"></script>
+    <script src="{% static 'js/classie.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/typed.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/jqBootstrapValidation.js' %}"></script>
+    <script src="{% static 'js/contact_me.js' %}"></script>
+    <script type="text/javascript">
+    $(function() {
+        $("#typed").typed({
+            strings: ["a Web Developer", "a Freelancer","Tarun"],
+            typeSpeed: 30,
+            // backDelay: 300,
+            startDelay: 700,
+            // backSpeed: 50,
+            // loop: false,
+            // contentType: 'html', // or text
+            // defaults to false for infinite loop
+            // loopCount: false,
+        });
+
+        $(".reset").click(function() {
+            $("#typed").typed('reset');
+        });
+
+
+        $('#quote-carousel').carousel({
+            pause: true,
+            interval: 4000,
+        });
+
+    });
+    /*
+                                    $(".element").typed({
+                            strings: ["First sentence.", "Second sentence."],
+                            // typing speed
+                            typeSpeed: 0,
+                            // time before typing starts
+                            startDelay: 0,
+                            // backspacing speed
+                            backSpeed: 0,
+                            // time before backspacing
+                            backDelay: 500,
+                            // loop
+                            loop: false,
+                            // false = infinite
+                            loopCount: false,
+                            // show cursor
+                            showCursor: true,
+                            // character for cursor
+                            cursorChar: "|",
+                            // attribute to type (null == text)
+                            attr: null,
+                            // either html or text
+                            contentType: 'html',
+                            // call when done callback function
+                            callback: function() {},
+                            // starting callback function before each string
+                            preStringTyped: function() {},
+                            //callback for every typed string
+                            onStringTyped: function() {},
+                            // callback for reset
+                            resetCallback: function() {}
+                        });
+                    });
+                */
+    </script>
+
+</body>
+
+</html>
